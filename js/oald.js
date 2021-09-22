@@ -1,4 +1,8 @@
-﻿(function () {
+﻿import {test} from './test.js';
+
+(function () {
+
+  test('abc')
 
   console.time("Time used for event binding");
 
