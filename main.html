@@ -2,58 +2,78 @@
 <html><head>
 <title>Oald Se7en</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="oa_genie_style.css"/>
-<link rel="stylesheet" href="scroll-bar.css"/>
-<link rel="stylesheet" href="style-chrome.css"/>
+<link rel="stylesheet" href="./css/oa_genie_style.css"/>
+<!--<link rel="stylesheet" href="oa_genie_style_2.css"/>-->
+<link rel="stylesheet" href="./css/scroll-bar.css"/>
+<link rel="stylesheet" href="./css/style-chrome.css"/>
 <link rel="shortcut icon" type="image/x-icon" href="icon16.ico">
-<style type="text/css" id="font-style"></style>
+<style id="font-style"></style>
 </head>
 
 <body>
 	<div id="main">
-		<div id="header">
-			<div><button id="add" title="Add to Vocabulary">.</button><button id="pron">♬<audio id="pronunciation" preload="auto"/><audio id="pronunciation1" preload="auto"/></button></div>
-			<h1 id="headword"></h1>
-			<div>
-				<button
-				 id="tools-button">Tools</button><button
-				  id="settings-button">Settings</button><button
-				   id="help-button">Help</button><button
-				    id="donate" title="觉得还不错？捐点小钱支持我的开发吧~"><a href="https://me.alipay.com/xieranmaya" target="_blank" style="color:#444;text-decoration:none;">Donate</a></button>
-			</div>
-		</div>
 		<div id="list">
 			<h1>OALD Se7en</h1>
 			<div id="search-outer">
-				<input autofocusss="true" type="search" results="0" id="search" size="12" x-webkit-speech /><button id="search-button"></button>
+				<input autofocusss="true" type="search" results="0" id="search" size="12" /><button id="search-button"></button>
 			</div>
 			<div id="list-content" class="word-list"></div>
 		</div>
-		<div id="content-wrapper"><div id="content"></div></div>
+		<div id="content-wrapper">
+			<div id="header">
+				<div><button id="add" title="Add to Vocabulary">.</button><button id="pron">♬<audio id="pronunciation" preload="auto"/><audio id="pronunciation1" preload="auto"/></button></div>
+				<h1 id="headword"></h1>
+				<div>
+					<button
+					id="tools-button">Tools</button><button
+						id="settings-button">Settings</button><button
+						id="help-button">Help</button><button
+							id="donate-button" title="觉得还不错？Buy me a coffee~">Donate</button>
+				</div>
+			</div>
+			<div id="content"></div>
+		</div>
 		<div id="vocabulary">
-			<h1 title="Click to toggle count.">Vocabulary</h1>
+			<h1 title="Click to toggle count">Vocabulary</h1>
 			<div id="search-vocabulary-outer">
 				<input type="search" results="0" id="search-vocabulary" size="12" placeholder="Search Vocabulary" />
 			</div>
 			<div id="vocabulary-content" class="word-list helix"></div>
+
+			<span class="closeme">+</span>
 		</div>
 		<div id="history">
 			<div><button id="clearhistory">Clear</button></div>
-			<h1 title="Click to toggle count.">History</h1>
+			<h1 title="Click to toggle count">History</h1>
 			<div id="search-history-outer">
 				<input type="search" results="0" id="search-history" size="12" placeholder="Search History" />
 			</div>
 			<div id="history-content" class="word-list helix"></div>
+			<span class="closeme">+</span>
+		</div>
+		<div id="pxb">
+			<span class="close">✘</span>
+			<article></article>
+			<!-- <h1>HELP!</h1>
+			<p>可爱又迷人的用户，感谢你这么长时间的陪伴，如你所见，我需要你的帮助。</p>
+			<p>最近，我做了一个艰难的决定：创业！</p>
+			<p>我曾在高中工作过两年，然后先后在阿里巴巴和小米任职前端工程师共三年。因为怀念讲台上的感觉，机缘巧合去了培训学校做兼职，经过学生的反馈，觉得自己还是适合做老师，于是萌生了想要开前端培训班的想法。</p>
+			<p>各位可能知道，开发这款App所使用的技术基本就是前端开发，这几年的工作也让我在这个方向上有了不少进步。而前端开发这个职位也是目前互联网行业最为稀缺的基础职位，普遍的工资在一到两万之间。</p>
+			<p>目前想法已经成熟，我将于9月26日在杭州下沙开办前端培训班，如果你或者你的朋友正在学习或想要学习前端开发，希望你能将他介绍到我这里来。同时如果你不满于现在的工作，有勇气转行到互联网行业，我也十分欢迎你来参加我的培训班！</p>
+			<p>如果有兴趣，可以<a href="xx" target="_blank">点击这里</a>了解更多关于我培训班的问题。</p>
+			<p>最后，非常抱歉在 App 里展示广告，如果你不喜欢这个广告，关闭就好了，它不会再次出现~另外，如果喜欢这款App，希望你能分享给你的朋友，或者去应用商店给个五星好评~最好能够写上喜欢她的理由~</p> -->
 		</div>
 	</div>
 	<div id="settings">
 		<span class="close"><u>[关闭]</u></span>
 		<h1>牛津高阶 - 选项 &nbsp;&nbsp; <button id="save-settings">保存</button></h1>
 		<hr>
+		<label><input type="checkbox" name="showVocabulary" id="showVocabulary" /> 显示生词本(刷新生效)</label>
+		<label><input type="checkbox" name="showHistory" id="showHistory" /> 显示查询历史(刷新生效)</label>
 		<label><input type="checkbox" name="autotrad" id="autotrad" /> 自动转换成繁体</label>
 		<label><input type="checkbox" name="autozoom" id="autozoom" /> 关闭自动缩放</label>
-		<label><input type="checkbox" name="nomenu" id="nomenu" /> 关闭右键菜单项(重启浏览器后生效)</label>
-		<label><input type="checkbox" name="autonotify" id="autonotify" /> 开启艾宾浩斯曲线提醒(适合使用电脑有规律的人。重启浏览器后生效)</label>
+		<label><input type="checkbox" name="nomenu" id="nomenu" /> 关闭右键菜单项(重启浏览器生效)</label>
+		<label><input type="checkbox" name="autonotify" id="autonotify" /> 开启艾宾浩斯曲线提醒(适合使用电脑有规律的人。重启浏览器生效)</label>
 		<label><input type="checkbox" name="shortcuts" id="shortcuts" /> 开启快捷键</label>
 		<label><input type="checkbox" name="onlyee" id="onlyee">仅显示英英释义(刷新生效)</label>
 		<fieldset>
@@ -98,8 +118,8 @@
 				<option value="">幼园</option>
 				<option value="">方正静蕾简体</option>
 				<option value="">文泉驿微米黑</option> -->
-			</select> 
-			自选英文字体：<input placeholder="自选字体名称" id="eng_font_customize" name="eng_font_customize" type="text" value=""> 
+			</select>
+			自选英文字体：<input placeholder="自选字体名称" id="eng_font_customize" name="eng_font_customize" type="text" value="">
 			<br>
 			想尝试更多英文字体？请至 <a href="https://www.google.com/fonts/" target="_blank">Google Fonts</a> 选择字体后将字体名称(字体名称为每个字体展示区左下角加粗的文字，请不要弄错了哦~)粘贴到自选字体文本框(直接复制就好，前后不要留空格)，如不使用自选字体请务必留空！
 			<br>
@@ -118,7 +138,7 @@
 		<h1>词典正在安装，请稍候...</h1>
 		<hr>
 		<div><progress id="install-progress" max="127" value="0"></progress></div>
-		<h2>数据量较大(50439词条)，请您耐心等待~~~</h3>
+		<h2>数据量较大(50439词条)，请您耐心等待~~~</h2>
 		<div>
 			<h1>趁此机会，学习一下如何使用吧~</h1>
 			<fieldset>
@@ -143,6 +163,9 @@
 		<div>
 
 			<a href="export.html" target="_blank">导出</a>
+			<div>
+				<a href="javascript:;" id="fe-training">前端培训</a>
+			</div>
 			<!--div id="export">
 				<textarea name="vocabulary-export" id="vocabulary-export" cols="30" rows="10"></textarea>
 			</div>
@@ -211,9 +234,9 @@
 			<legend>使用技巧</legend>
 			<div>
 				1.中键单击例句可发音 <br>
-				2.中键单击复习窗口内部任意位置可关闭小窗口 <br>
-				3.单击Vocabulary和History可查看记数 <br>
-				4.双击历史记录条目可将单词加入生词表 <br>
+				2.单击Vocabulary和History可查看记数 <br>
+				3.双击历史记录条目可将单词加入生词表 <br>
+				4.英英状态下长按例句可显示中文释义 <br>
 			</div>
 		</fieldset>
 		<fieldset>
@@ -227,7 +250,8 @@
 			<legend>意见或建议</legend>
 			<div>
 				如果您对本软件有任何意见或建议或发现了软件的Bug，欢迎给我发邮件交流<br>
-				我的邮件地址：<b style="color:yellow">xieranmaya@gmail.com</b>，来信请注明和Oald 7 Chrome App相关~
+				我的邮件地址：<b style="color:yellow">xieranmaya@gmail.com</b>，来信请注明和Oald 7 Chrome App相关~<br>
+				你也可以直接通过微信或QQ联系到我：285696737
 			</div>
 		</fieldset>
 		<fieldset>
@@ -241,11 +265,27 @@
 			<div>您正在使用<span id="version"></span>版</div>
 		</fieldset>
 	</div>
-
-<script src="jquery-1.7.1.min.js"></script>
-<!-- <script src="get-jQuery-from-bg.js"></script> -->
+	<div id="donate">
+		<span class="close"><u>[关闭]</u></span>
+		<h1>如果您觉得本软件对您的学习有帮忙，您可以捐款以支持我的开发 : )</h1>
+		<h2>如果您没有资金来源，您也可以到商店给软件做一个评价，<strong style="color:yellow"><a href="https://chrome.google.com/webstore/detail/oald-7-%E7%89%9B%E6%B4%A5%E9%AB%98%E9%98%B6%E7%AC%AC%E4%B8%83%E7%89%88/adodeopedjkoofdbblibackjdklbnepe?hl=zh-CN&gl=CN" target="_blank">点我去评价</a></strong></h2>
+		<h2>扫码捐款：</h2>
+		<div class="donate-qr">
+			<img src="donate-qr/weixin-any.png" alt="">
+			<img src="donate-qr/alipay-any.jpg" alt="">
+		</div>
+		<h2>联系我：</h2>
+		<div>
+			微信：<img src="donate-qr/weixin.jpg" alt="">
+			QQ：<img src="donate-qr/qq.jpg" alt="">
+		</div>
+	</div>
+</body>
+<script src="./libs/jquery.min.js"></script>
+<script src="marked.js"></script>
 <script src="nativeExtend.js"></script>
 <script src="common.js"></script>
+<script src="google-tts-api.js"></script>
 <script src="oald.js"></script>
 <script src="t.js"></script>
-</body></html>
+</html>

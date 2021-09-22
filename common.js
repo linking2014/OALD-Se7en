@@ -33,6 +33,10 @@ var popup = function(word) {
             var lastClickTime = 0;
             notification.onclick = function() {
 
+                window.open("main.html#" + word);
+                this.close();
+                return
+
                 //本次单词的时间与上次时间之差小于500毫秒，判定为双击
                 if (new Date() - lastClickTime < 500) {
                     window.open("main.html#" + word);
@@ -59,16 +63,43 @@ var playWord = function(word) {
     pron1.play();
 };
 
-var popup4learn = function(word) {
+
+function popup4learn(word) {
     db.sql('SELECT * FROM oald7 WHERE headword=?', [word], function(tx, result) {
         var content = result.rows.item(0)['content'];
-        var notification = new Notification("%s /%s/ (亲，学习啦~)".format(word, $(content).find("span.oa_i_phon:first").text()), {
+
+        chrome.notifications.create({
+            type: 'basic',
+            iconUrl: 'learn-pics/learn' + Math.floor(Math.random() * 10) + '.jpg',
+            title: `${word} /${$(content).find("span.oa_i_phon:first").text()}/`,
+            message: $(content).find("span.oa_d span.oa_chn,span.oa_ud span.oa_chn").slice(0, 3).map(function() {
+                return $(this).text();
+            }).get().join("\n"),
+        }, id => {
+            chrome.notifications.onClicked.addListener(function onClicked(clickedId) {
+                if (clickedId == id) {
+                    window.open('main.html#' + word)
+                    chrome.notifications.onClicked.removeListener(onClicked)
+                }
+            })
+        })
+    })
+}
+
+popup = popup4learn;
+
+var popup4learn2 = function(word) {
+    db.sql('SELECT * FROM oald7 WHERE headword=?', [word], function(tx, result) {
+        var content = result.rows.item(0)['content'];
+        var notification = new Notification("%s /%s/".format(word, $(content).find("span.oa_i_phon:first").text()), {
             icon: 'learn-pics/learn' + Math.floor(Math.random() * 10) + '.jpg',
             body: $(content).find("span.oa_d span.oa_chn,span.oa_ud span.oa_chn").slice(0, 3).map(function() {
                 return $(this).text();
             }).get().join("\n")
         });
         notification.onclick = function() {
+            // debugger
+            console.log('popup4learn clicked')
             window.open("main.html#" + word);
             this.close();
         };

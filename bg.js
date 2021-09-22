@@ -1,12 +1,12 @@
 if (localStorage.version < chrome.manifest.version || localStorage.version === undefined) {
     var updateinfo = new Notification('Oald Se7en Chrome App', {
         icon: 'icon.gif',
-        body: '您好！Oald Se7en Chrome App 已升级到最新版本(v %s)：\n1.修复提醒失效的问题，请各位务必升级到Chrome最新版本，老版本可能会报错\n2.去除两款几乎不会有人用的字体\n3.祝大家儿童节快乐~~'.format(chrome.manifest.version)
+        body: `Oald Se7en 已升级 v${chrome.manifest.version}：\n右侧边栏可收起\n修复无法发音的问题`
     });
 
     updateinfo.onclick = function() {
         //window.open("main.html");
-        window.open("https://chrome.google.com/webstore/detail/oald-7-%E7%89%9B%E6%B4%A5%E9%AB%98%E9%98%B6%E7%AC%AC%E4%B8%83%E7%89%88/nmdnfeohnddmdmknpjbmnknkmkpcehhn/details?hl=zh-CN&gl=CN");
+        window.open("https://chrome.google.com/webstore/detail/oald-7-%E7%89%9B%E6%B4%A5%E9%AB%98%E9%98%B6%E7%AC%AC%E4%B8%83%E7%89%88/adodeopedjkoofdbblibackjdklbnepe?hl=zh-CN");
         this.close();
     };
 
@@ -20,7 +20,7 @@ if (localStorage.version < chrome.manifest.version || localStorage.version === u
             localStorage["learn" + wordlistitem[i][0]] = localStorage["learn" + wordlistitem[i][0]] || "false";
         }
     }
-    localStorage.eng_fonts = localStorage.eng_fonts || "Milonga";
+    localStorage.eng_fonts = localStorage.eng_fonts || "Averia Serif Libre";
     localStorage.chn_fonts = localStorage.chn_fonts || "仿宋";
     localStorage.eng_font_customize = localStorage.eng_font_customize || "";
     localStorage.font_size = localStorage.font_size || "1";
@@ -28,6 +28,9 @@ if (localStorage.version < chrome.manifest.version || localStorage.version === u
     localStorage.removeItem("autopron");
     localStorage.shortcuts = "true"; //快捷键
     localStorage.shownotificationchn = "false"; //默认不显示复习窗口中文，更利于在句子中学习单词
+    localStorage.pxbHelp = localStorage.pxbHelp || "true";//培训班招生
+    localStorage.showVocabulary = localStorage.showVocabulary || "true"
+    localStorage.showHisory = localStorage.showHisory || "true"
 }
 
 //把bg的hash设置为版本
