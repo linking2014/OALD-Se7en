@@ -1,4 +1,4 @@
-window.$ = window.jQuery = function(selector){
-	var $ = chrome.extension.getBackgroundPage().$;
-	return $(selector, document);
+window.$ = window.jQuery = function (selector) {
+  var $ = chrome.extension.getBackgroundPage().$;
+  return $(selector, document);
 };

@@ -1,34 +1,34 @@
 /**
 
-This code is from:
-https://www.npmjs.com/package/google-tts-api
+ This code is from:
+ https://www.npmjs.com/package/google-tts-api
 
-The MIT License (MIT)
+ The MIT License (MIT)
 
-Copyright (c) 2016 Leon Huang
+ Copyright (c) 2016 Leon Huang
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
 
 
  */
 
-(function(){
+(function () {
 
   var host = 'https://translate.google.cn';
 
@@ -56,35 +56,35 @@ SOFTWARE.
     return fetch(host, {
       timeout: timeout || 10 * 1000
     })
-    .then(function (res) {
-      if (res.status !== 200) {
-        throw new Error('request to ' + host + ' failed, status code = ' + res.status + ' (' + res.statusText + ')');
-      }
-      return res.text();
-    })
-    .then(function (html) {
-      const expressions = [
-        "TKK='(\\d+.\\d+)';",
-        "tkk:'(\\d+.\\d+)'"
-      ];
+      .then(function (res) {
+        if (res.status !== 200) {
+          throw new Error('request to ' + host + ' failed, status code = ' + res.status + ' (' + res.statusText + ')');
+        }
+        return res.text();
+      })
+      .then(function (html) {
+        const expressions = [
+          "TKK='(\\d+.\\d+)';",
+          "tkk:'(\\d+.\\d+)'"
+        ];
 
-      const matches = expressions
-        .map(expr => html.match(expr))
-        .filter(res => res);
+        const matches = expressions
+          .map(expr => html.match(expr))
+          .filter(res => res);
 
-      if (!matches.length) throw new Error('get key failed from google');
+        if (!matches.length) throw new Error('get key failed from google');
 
-      keyCache = matches[0][1];
+        keyCache = matches[0][1];
 
-      setTimeout(() => {//让keyCache半小时后失效
-        keyCache = null
-      }, 1000 * 60 * 60)
+        setTimeout(() => {//让keyCache半小时后失效
+          keyCache = null
+        }, 1000 * 60 * 60)
 
-      return keyCache
-    });
+        return keyCache
+      });
   };
 
-  function XL (a, b) {
+  function XL(a, b) {
     for (var c = 0; c < b.length - 2; c += 3) {
       var d = b.charAt(c + 2);
       d = d >= 'a' ? d.charCodeAt(0) - 87 : Number(d);
@@ -107,10 +107,10 @@ SOFTWARE.
     for (var e = [], f = 0, g = 0; g < a.length; g++) {
       var m = a.charCodeAt(g);
       128 > m ? e[f++] = m : (2048 > m ? e[f++] = m >> 6 | 192 : (55296 == (m & 64512) && g + 1 < a.length && 56320 == (a.charCodeAt(g + 1) & 64512) ? (m = 65536 + ((m & 1023) << 10) + (a.charCodeAt(++g) & 1023),
-      e[f++] = m >> 18 | 240,
-      e[f++] = m >> 12 & 63 | 128) : e[f++] = m >> 12 | 224,
-      e[f++] = m >> 6 & 63 | 128),
-      e[f++] = m & 63 | 128);
+        e[f++] = m >> 18 | 240,
+        e[f++] = m >> 12 & 63 | 128) : e[f++] = m >> 12 | 224,
+        e[f++] = m >> 6 & 63 | 128),
+        e[f++] = m & 63 | 128);
     }
     a = b;
     for (f = 0; f < e.length; f++) {
